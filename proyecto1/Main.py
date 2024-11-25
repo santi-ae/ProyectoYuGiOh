@@ -24,11 +24,40 @@ def main():
     tablero = Tablero()
     #mostramos la mano al jugadro
     
-    for carta in jugador.mano: 
-        if isinstance(CartaMounstro):
-            print(f"{carta.nombre}  {carta.descripcion} {carta.ataque} {carta.defensa} {carta.tipoMounstro} {carta.atributo}")
+    i=0           
+    turno_jugador = random.choice([True, False]) 
+    if turno_jugador: 
+        print("\nEl jugador comienza primero.")
+    
+    else: 
+        print("\nLa máquina comienza primero.")
+
+    if turno_jugador is True:
+        turno_actual = jugador.nombre
+    else:
+        turno_actual="maquina"
+    
+    while jugador.puntos>0 and maquina.puntos>0:
+        
+        if turno_actual == "Jugador" and i==0: 
+            print("\nTurno del Jugador") 
+            carta_robada = jugador.robar_carta() 
+            if carta_robada: 
+                print(f"El jugador robó la carta: {carta_robada.nombre}") 
+        
+            else: 
+                print("El jugador no puede robar más cartas, su deck está vacío.")
             
-        elif isinstance(CartaMagica):
-            print(f"{carta.nombre} {carta.descripcion}{carta.aumento} {carta.estadistica}")
+            print("Mano del Jugador:")
+            for carta in jugador.mano: 
+                if isinstance(CartaMounstro):
+                    print(f"{carta.nombre}  {carta.descripcion} {carta.ataque} {carta.defensa} {carta.tipoMounstro} {carta.atributo}")
             
-        elif isinstance(CartaTrampa):
+                elif isinstance(CartaMagica):
+                    print(f"{carta.nombre} {carta.descripcion}{carta.aumento} {carta.estadistica}")
+            
+                elif isinstance(CartaTrampa):
+                    print(f"{carta.nombre} {carta.descripcion}{carta.atributo} ")
+
+
+            
